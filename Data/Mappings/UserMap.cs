@@ -35,5 +35,23 @@ public class UserMap : IEntityTypeConfiguration<User>
         
         builder.HasIndex(x => x.Slug, "IX_User_Slug")
                .IsUnique();
+        
+        builder.HasMany(x => x.Roles)
+               .WithMany(x => x.Authors)
+               .UsingEntity<Dictionary<string, object>>
+               (
+                    "UserRole",
+                    Role => Role.HasOne<Role>()
+                            .WithMany()
+                            .HasForeignKey("RoleId")
+                            .HasConstraintName("FK_UserRole_RoleId")
+                            .OnDelete(DeleteBehavior.Cascade),
+
+                    user => user.HasOne<User>()
+                           .WithMany()
+                           .HasForeignKey("UserId")
+                           .HasConstraintName("FK_UserRole_UserId")
+                           .OnDelete(DeleteBehavior.Cascade)
+               );
     }
 }

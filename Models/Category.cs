@@ -21,4 +21,6 @@ public class Category
     [MinLength(3)]
     [Column("Slug", TypeName = "VARCHAR")]
     public string Slug { get; set; }
+
+    public IList<Post> Posts { get; set; }
 }

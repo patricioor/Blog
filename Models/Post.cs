@@ -23,4 +23,6 @@ public class Post
     [ForeignKey("AuthorId")]
     public int AuthorId { get; set; }
     public User Author { get; set; }
+
+    public IList<Tag> Tags { get; set; }
 }

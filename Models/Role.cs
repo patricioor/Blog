@@ -21,4 +21,6 @@ public class Role
     [MinLength(3)]
     [Column("Slug", TypeName = "VARCHAR")]
     public string Slug { get; set; }
+
+    public IList<User> Authors { get; set; }
 }
